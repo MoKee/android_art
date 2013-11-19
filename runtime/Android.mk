@@ -254,6 +254,10 @@ ifeq ($(ART_USE_PORTABLE_COMPILER),true)
   LIBART_CFLAGS += -DART_USE_PORTABLE_COMPILER=1
 endif
 
+# WORKAROUND: Per Google bug 61916, bypass monitor enter/exit checks
+# to temporarily fix issues with some apps
+LIBART_CFLAGS += -DWORKAROUND_BUG_61916
+
 # $(1): target or host
 # $(2): ndebug or debug
 define build-libart
