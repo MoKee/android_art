@@ -1723,6 +1723,7 @@ static const char* class_initializer_black_list[] = {
   "Landroid/media/SoundPool;",  // Calls OsConstants.initConstants.
   "Landroid/media/videoeditor/MediaArtistNativeHelper;",  // Calls OsConstants.initConstants.
   "Landroid/media/videoeditor/VideoEditorProfile;",  // Calls OsConstants.initConstants.
+  "Landroid/mokee/location/PhoneLocation;",  // Calls OsConstants.initConstants.
   "Landroid/mtp/MtpDatabase;",  // Calls OsConstants.initConstants.
   "Landroid/mtp/MtpDevice;",  // Calls OsConstants.initConstants.
   "Landroid/mtp/MtpServer;",  // Calls OsConstants.initConstants.
