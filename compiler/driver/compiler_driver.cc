@@ -1742,6 +1742,7 @@ static const char* class_initializer_black_list[] = {
   "Landroid/media/MediaRecorder;",  // Calls System.loadLibrary.
   "Landroid/media/MediaScanner;",  // Calls System.loadLibrary.
   "Landroid/media/ResampleInputStream;",  // Calls OsConstants.initConstants.
+  "Landroid/media/screenrecorder/ScreenRecorder;",  // Calls OsConstants.initConstants.
   "Landroid/media/SoundPool;",  // Calls OsConstants.initConstants.
   "Landroid/media/videoeditor/MediaArtistNativeHelper;",  // Calls OsConstants.initConstants.
   "Landroid/media/videoeditor/VideoEditorProfile;",  // Calls OsConstants.initConstants.
