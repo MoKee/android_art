@@ -1746,7 +1746,6 @@ static const char* class_initializer_black_list[] = {
   "Landroid/media/SoundPool;",  // Calls OsConstants.initConstants.
   "Landroid/media/videoeditor/MediaArtistNativeHelper;",  // Calls OsConstants.initConstants.
   "Landroid/media/videoeditor/VideoEditorProfile;",  // Calls OsConstants.initConstants.
-  "Landroid/mokee/location/PhoneLocation;",  // Calls OsConstants.initConstants.
   "Landroid/mtp/MtpDatabase;",  // Calls OsConstants.initConstants.
   "Landroid/mtp/MtpDevice;",  // Calls OsConstants.initConstants.
   "Landroid/mtp/MtpServer;",  // Calls OsConstants.initConstants.
@@ -2105,6 +2104,7 @@ static const char* class_initializer_black_list[] = {
   "Lorg/apache/http/conn/params/ConnRouteParams;",  // Requires java.util.Locale.
   "Lorg/apache/http/conn/ssl/SSLSocketFactory;",  // Calls java.security.Security.getProperty.
   "Lorg/apache/http/conn/util/InetAddressUtils;",  // Calls regex.Pattern.compile -..-> regex.Pattern.compileImpl.
+  "Lorg/mokee/location/PhoneLocation;",  // Calls OsConstants.initConstants.
 };
 
 static void InitializeClass(const ParallelCompilationManager* manager, size_t class_def_index)
