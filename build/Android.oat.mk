@@ -48,29 +48,11 @@ define create-core-oat-host-rules
 
   # With the optimizing compiler, we want to rerun dex2oat whenever there is
   # a dex2oat change to catch regressions early.
-  ifeq ($(ART_USE_OPTIMIZING_COMPILER), true)
-    core_dex2oat_dependency := $(DEX2OAT)
-  endif
+  core_dex2oat_dependency := $(DEX2OAT)
 
-  ifeq ($(1),default)
-    core_compile_options += --compiler-backend=Quick
-  endif
-  ifeq ($(1),optimizing)
-    core_compile_options += --compiler-backend=Optimizing
-    core_dex2oat_dependency := $(DEX2OAT)
-    core_infix := -optimizing
-  endif
-  ifeq ($(1),interpreter)
-    core_compile_options += --compiler-filter=interpret-only
-    core_infix := -interpreter
-  endif
-  ifeq ($(1),default)
-    # Default has no infix, no compile options.
-  endif
-  ifneq ($(filter-out default interpreter jit optimizing,$(1)),)
-    #Technically this test is not precise, but hopefully good enough.
-    $$(error found $(1) expected default, interpreter, jit or optimizing)
-  endif
+  core_compile_options += --compiler-backend=Optimizing
+  core_dex2oat_dependency := $(DEX2OAT)
+  core_infix := -optimizing
 
   ifeq ($(2),pic)
     core_compile_options += --compile-pic
@@ -140,15 +122,11 @@ define create-core-oat-host-rule-combination
   endif
 endef
 
-$(eval $(call create-core-oat-host-rule-combination,default,,))
 $(eval $(call create-core-oat-host-rule-combination,optimizing,,))
-$(eval $(call create-core-oat-host-rule-combination,interpreter,,))
 
 valgrindHOST_CORE_IMG_OUTS :=
 valgrindHOST_CORE_OAT_OUTS :=
-$(eval $(call create-core-oat-host-rule-combination,default,valgrind,32))
 $(eval $(call create-core-oat-host-rule-combination,optimizing,valgrind,32))
-$(eval $(call create-core-oat-host-rule-combination,interpreter,valgrind,32))
 
 valgrind-test-art-host-dex2oat-host: $(valgrindHOST_CORE_IMG_OUTS)
 
@@ -162,29 +140,11 @@ define create-core-oat-target-rules
 
   # With the optimizing compiler, we want to rerun dex2oat whenever there is
   # a dex2oat change to catch regressions early.
-  ifeq ($(ART_USE_OPTIMIZING_COMPILER), true)
-    core_dex2oat_dependency := $(DEX2OAT)
-  endif
+  core_dex2oat_dependency := $(DEX2OAT)
 
-  ifeq ($(1),default)
-    core_compile_options += --compiler-backend=Quick
-  endif
-  ifeq ($(1),optimizing)
-    core_compile_options += --compiler-backend=Optimizing
-    core_dex2oat_dependency := $(DEX2OAT)
-    core_infix := -optimizing
-  endif
-  ifeq ($(1),interpreter)
-    core_compile_options += --compiler-filter=interpret-only
-    core_infix := -interpreter
-  endif
-  ifeq ($(1),default)
-    # Default has no infix, no compile options.
-  endif
-  ifneq ($(filter-out default interpreter jit optimizing,$(1)),)
-    # Technically this test is not precise, but hopefully good enough.
-    $$(error found $(1) expected default, interpreter, jit or optimizing)
-  endif
+  core_compile_options += --compiler-backend=Optimizing
+  core_dex2oat_dependency := $(DEX2OAT)
+  core_infix := -optimizing
 
   ifeq ($(2),pic)
     core_compile_options += --compile-pic
@@ -259,15 +219,11 @@ define create-core-oat-target-rule-combination
   endif
 endef
 
-$(eval $(call create-core-oat-target-rule-combination,default,,))
 $(eval $(call create-core-oat-target-rule-combination,optimizing,,))
-$(eval $(call create-core-oat-target-rule-combination,interpreter,,))
 
 valgrindTARGET_CORE_IMG_OUTS :=
 valgrindTARGET_CORE_OAT_OUTS :=
-$(eval $(call create-core-oat-target-rule-combination,default,valgrind,32))
 $(eval $(call create-core-oat-target-rule-combination,optimizing,valgrind,32))
-$(eval $(call create-core-oat-target-rule-combination,interpreter,valgrind,32))
 
 valgrind-test-art-host-dex2oat-target: $(valgrindTARGET_CORE_IMG_OUTS)
 
