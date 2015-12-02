@@ -42,7 +42,11 @@ class CompilerOptions FINAL {
   };
 
   // Guide heuristics to determine whether to compile method if profile data not available.
+#if defined(ART_USE_OPTIMIZING_COMPILER)
+  static const CompilerFilter kDefaultCompilerFilter = kEverything;
+#else
   static const CompilerFilter kDefaultCompilerFilter = kSpeed;
+#endif
   static const size_t kDefaultHugeMethodThreshold = 10000;
   static const size_t kDefaultLargeMethodThreshold = 600;
   static const size_t kDefaultSmallMethodThreshold = 60;
