@@ -331,10 +331,6 @@ class ShadowFrame {
     return method_;
   }
 
-  void SetMethod(ArtMethod* method) SHARED_REQUIRES(Locks::mutator_lock_) {
-    method_ = method;
-  }
-
   mirror::Object* GetThisObject() const SHARED_REQUIRES(Locks::mutator_lock_);
 
   mirror::Object* GetThisObject(uint16_t num_ins) const SHARED_REQUIRES(Locks::mutator_lock_);
@@ -601,14 +597,6 @@ class StackVisitor {
   ArtMethod* GetOuterMethod() const {
     return *GetCurrentQuickFrame();
   }
-
-  void SetMethod(ArtMethod* method) SHARED_REQUIRES(Locks::mutator_lock_) {
-	  if (cur_shadow_frame_ != nullptr) {
-	    cur_shadow_frame_->SetMethod(method);
-	  } else if (cur_quick_frame_ != nullptr) {
-	    *cur_quick_frame_ = method;
-	  }
-	}
 
   bool IsShadowFrame() const {
     return cur_shadow_frame_ != nullptr;

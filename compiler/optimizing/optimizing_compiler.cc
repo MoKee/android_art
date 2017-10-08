@@ -403,7 +403,9 @@ static void MaybeRunInliner(HGraph* graph,
                             const DexCompilationUnit& dex_compilation_unit,
                             PassObserver* pass_observer,
                             StackHandleScopeCollection* handles) {
-  bool should_inline = false;
+  const CompilerOptions& compiler_options = driver->GetCompilerOptions();
+  bool should_inline = (compiler_options.GetInlineDepthLimit() > 0)
+      && (compiler_options.GetInlineMaxCodeUnits() > 0);
   if (!should_inline) {
     return;
   }
