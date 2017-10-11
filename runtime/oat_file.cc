@@ -1491,7 +1491,7 @@ static const std::string GetCanonicalPath(std::string path) {
   // Therefore avoid checking whether the path is a symlink and just try resolving it.
   std::unique_ptr<char[]> buf(new char[PATH_MAX]);
   ssize_t len;
-  while (TEMP_FAILURE_RETRY(len = readlink(path.c_str(), buf.get(), PATH_MAX - 1)) != -1) {
+  while ((len = TEMP_FAILURE_RETRY(readlink(path.c_str(), buf.get(), PATH_MAX - 1))) != -1) {
     buf.get()[len] = '\0';
     path = buf.get();
   }
