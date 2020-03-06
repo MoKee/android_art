@@ -224,7 +224,7 @@ static jint Unsafe_addressSize(JNIEnv* env ATTRIBUTE_UNUSED, jobject ob ATTRIBUT
 }
 
 static jint Unsafe_pageSize(JNIEnv* env ATTRIBUTE_UNUSED, jobject ob ATTRIBUTE_UNUSED) {
-  return sysconf(_SC_PAGESIZE);
+  return 0x4000;
 }
 
 static jlong Unsafe_allocateMemory(JNIEnv* env, jobject, jlong bytes) {
