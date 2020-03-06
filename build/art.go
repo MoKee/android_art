@@ -85,20 +85,20 @@ func globalFlags(ctx android.BaseContext) ([]string, []string) {
 	//       the debug version. So make the gap consistent (and adjust for the worst).
 	if len(ctx.AConfig().SanitizeDevice()) > 0 || len(ctx.AConfig().SanitizeHost()) > 0 {
 		cflags = append(cflags,
-			"-DART_STACK_OVERFLOW_GAP_arm=8192",
-			"-DART_STACK_OVERFLOW_GAP_arm64=8192",
+			"-DART_STACK_OVERFLOW_GAP_arm=16384",
+			"-DART_STACK_OVERFLOW_GAP_arm64=16384",
 			"-DART_STACK_OVERFLOW_GAP_mips=16384",
 			"-DART_STACK_OVERFLOW_GAP_mips64=16384",
 			"-DART_STACK_OVERFLOW_GAP_x86=16384",
-			"-DART_STACK_OVERFLOW_GAP_x86_64=20480")
+			"-DART_STACK_OVERFLOW_GAP_x86_64=32768")
 	} else {
 		cflags = append(cflags,
-			"-DART_STACK_OVERFLOW_GAP_arm=8192",
-			"-DART_STACK_OVERFLOW_GAP_arm64=8192",
+			"-DART_STACK_OVERFLOW_GAP_arm=16384",
+			"-DART_STACK_OVERFLOW_GAP_arm64=16384",
 			"-DART_STACK_OVERFLOW_GAP_mips=16384",
 			"-DART_STACK_OVERFLOW_GAP_mips64=16384",
-			"-DART_STACK_OVERFLOW_GAP_x86=8192",
-			"-DART_STACK_OVERFLOW_GAP_x86_64=8192")
+			"-DART_STACK_OVERFLOW_GAP_x86=16384",
+			"-DART_STACK_OVERFLOW_GAP_x86_64=16384")
 	}
 
 	if envTrue(ctx, "ART_ENABLE_ADDRESS_SANITIZER") {

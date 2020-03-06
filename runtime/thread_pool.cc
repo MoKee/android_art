@@ -53,7 +53,6 @@ ThreadPoolWorker::ThreadPoolWorker(ThreadPool* thread_pool, const std::string& n
                                 /*low_4gb=*/ false,
                                 &error_msg);
   CHECK(stack_.IsValid()) << error_msg;
-  CHECK_ALIGNED(stack_.Begin(), kPageSize);
   CheckedCall(mprotect,
               "mprotect bottom page of thread pool worker stack",
               stack_.Begin(),
